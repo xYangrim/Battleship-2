@@ -5,14 +5,15 @@ const { compTurn } = require('./compAttack');
 const { endOfGame } = require('./endOfGame');
 
 
-
+let compShipsRemaining = 5;
 let pastAttacks = [];
 
 function resetPlayerAttacks() {
     pastAttacks = [];
+    compShipsRemaining = 5;
 }
 
-function playerTurn(board, playerBoard, ships, compShipsRemaining, gameCallback) {
+function playerTurn(board, playerBoard, ships, gameCallback) {
 
 
     let isMyTurn = true;
@@ -43,7 +44,7 @@ function playerTurn(board, playerBoard, ships, compShipsRemaining, gameCallback)
         board[row][col] = 'X';
         displayBoard(board);
         console.log(`Hit!`);
-        updateHits(row, col, ships, compShipsRemaining, gameCallback);
+        updateHits(row, col, ships, gameCallback);
       } else if(board[row][col] && pastAttacks.includes(strikeInput)) {
           continue;
       } else if (!board[row][col] && !pastAttacks.includes(strikeInput)){
@@ -57,7 +58,7 @@ function playerTurn(board, playerBoard, ships, compShipsRemaining, gameCallback)
   }
   
   
-  function updateHits(row, col, ships, compShipsRemaining, gameCallback) {
+  function updateHits(row, col, ships, gameCallback) {
       for (const shipName in ships) {
           if (ships.hasOwnProperty(shipName)) {
               // const ship = {...ships[shipName]};

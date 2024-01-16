@@ -16,7 +16,6 @@ function playGame() {
  
   let compShipNames = Object.keys(compShips);
   let playerShipNames = Object.keys(playerShips);
-  let compShipsRemaining = 5;
  
 
   rs.keyInPause('Press any key to start... ');
@@ -47,7 +46,7 @@ function playGame() {
 
 
   while(true) {
-    playerTurn(compBoard, playerBoard, compShips, compShipsRemaining, gameCallback);
+    playerTurn(compBoard, playerBoard, compShips, gameCallback);
     compTurn(playerBoard, playerShips, playerShipNames, gameCallback);
   }
 

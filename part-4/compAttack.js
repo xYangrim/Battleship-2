@@ -1,39 +1,57 @@
 
 let compPastAttacks = [];
 
-function resetCompPastAttacks() {
-  compPastAttacks = [];
-}
-
-function compTurn(board, playerShips, playerShipNames, gameCallback) { 
-  let playerTurn = false;
-
-  let row, col;
-
-    while(playerTurn === false) {
-      row = Math.floor(Math.random() * boardSize);
-      col = Math.floor(Math.random() * boardSize);
-      let compAttk = [row, col];
-
-      let isInPastAttacks = compPastAttacks.some(pos => pos[0] === row && pos[1] === col);
       // Change cell to 'X' 
       // Set up computer ships object 
 
       // increment hits to ship object hits value
       // Display hit/board to user 
+
+function resetCompPastAttacks() {
+  compPastAttacks = [];
+}
+
+
+function checkPastAttacks(row, col, compPastAttacks) {
+  return  isInPastAttacks = compPastAttacks.some(pos => pos[0] === row && pos[1] === col);
+  }
+
+function compTurn(board, playerShips, playerShipNames, gameCallback) { 
+  let playerTurn = false;
+
+
+  let row, col;
+
+    while(playerTurn === false) {
+      let isInPastAttacks = false;
+
+      do {
+        row = Math.floor(Math.random() * boardSize);
+        col = Math.floor(Math.random() * boardSize);
+        isInPastAttacks = checkPastAttacks(row, col, compPastAttacks);
+        console.log(`Generated position: row = ${row}, col = ${col}, isInPastAttacks = ${isInPastAttacks}`)
+      } while(isInPastAttacks);
+
+
+      let compAttk = [row, col];
   
       console.log(`starting compAttk is = ${compAttk}`);
-      // console.log(playerShips[playerShipNames].position)
+
+      if(isInPastAttacks) {
+        console.log('this should not be running')
+      }
 
       if(board[row][col] && !isInPastAttacks) {
         console.log(`Computer Attack is: row = ${row}, col = ${col} and HIT!`)
+        console.log(`checking isInPastAttacks = ${isInPastAttacks}`);
 
       }
-      compPastAttacks.push(JSON.stringify(compAttk));
+      compPastAttacks.push(compAttk);
+      console.log('testing')
       playerTurn = true;
     }
 
-    console.log(`Computer past attacks are = ${compPastAttacks}`)
+    console.log(`Computer past attacks are = ${JSON.stringify(compPastAttacks)}`)
   }
 
 
