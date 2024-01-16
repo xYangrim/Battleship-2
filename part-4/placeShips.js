@@ -1,6 +1,4 @@
-const { ships, shipNames } = require('./ships.js')
-
-function placeShips(board, boardSize) {
+function placeShips(board, boardSize, ships, shipNames) {
     for(let i = 0; i < shipNames.length; i++) {
         let row, col, direction;
         let length = ships[shipNames[i]].length;

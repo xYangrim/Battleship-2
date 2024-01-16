@@ -34,7 +34,17 @@ const allShips = {
 };
 
 
+    let compShips = _.cloneDeep(allShips);
+    let ships = _.cloneDeep(allShips);
+    
+    let compShipNames = Object.keys(compShips);    
+    let shipNames = Object.keys(ships);
+
 
 module.exports = {
-    allShips
+    allShips,
+    ships,
+    compShips,
+    compShipNames,
+    shipNames
 };

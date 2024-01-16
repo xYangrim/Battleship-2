@@ -2,7 +2,7 @@ const rs = require('readline-sync');
 
 function createBoardSize() {
     while(true) {
-      const boardSizeInput = rs.question('Input board size (I.E -> "6" for a 6x6 board) => ');
+      let boardSizeInput = rs.question('Input board size (I.E -> "6" for a 6x6 board) => ');
       if(boardSizeInput > 5 && boardSizeInput < 15) {
         let boardSize = parseInt(boardSizeInput);
         return boardSize;
