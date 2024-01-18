@@ -25,7 +25,6 @@ function displayBoard2(board) {
         }
         console.log(rowStr + '\n' + '    ' + '-'.repeat(board.length * 4));
       }
-  
     }
 
     module.exports ={ displayBoard, displayBoard2 };

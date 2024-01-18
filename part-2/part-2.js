@@ -2,7 +2,7 @@ const rs = require('readline-sync');
 
 let boardSize = 0;
 let board = [];
-let shipsRemaining = 1;
+let shipsRemaining = 5;
 let pastAttacks = [];
 
 

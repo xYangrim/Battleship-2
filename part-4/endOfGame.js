@@ -17,7 +17,7 @@ function endOfGame(winner) {
       }
   
       if (restartGame.toUpperCase() === 'Y') {
-        console.log(`should restart game`);
+        console.log(`Game is Restarting!`);
         isGameOver = true;
         break;
 

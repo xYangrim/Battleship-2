@@ -236,11 +236,6 @@ function playGame() {
     createBoardSize();
     createBoard();
     placeShips();
-
-    for(let i = 0; i < shipNames.length; i++) {
-        console.log(`ship name: ${ships[shipNames[i]].name}, position: ${JSON.stringify(ships[shipNames[i]].position)}` );
-    }
-
     displayBoard2();
     displayBoard();
     // console.log(board);

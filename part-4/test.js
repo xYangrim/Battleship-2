@@ -12,6 +12,21 @@
 
 // console.log(isInPastAttacks)
 
-let test = false;
+// let test = false;
 
-console.log(!test);
+// console.log(!test);
+
+
+function test() {
+    if(true) {
+        if(true) {
+            console.log(`1st nested if - true!`);
+        }
+
+        if(true) {
+            console.log(`2nd nested if - true!`);
+        }
+    }
+}
+
+console.log(test());

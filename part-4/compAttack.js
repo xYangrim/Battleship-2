@@ -1,5 +1,8 @@
+const { endOfGame } = require('./endOfGame');
 
+let playerShipsRemaining = 5
 let compPastAttacks = [];
+let isPlayer = true;
 
       // Change cell to 'X' 
       // Set up computer ships object 
@@ -9,14 +12,17 @@ let compPastAttacks = [];
 
 function resetCompPastAttacks() {
   compPastAttacks = [];
+  playerShipsRemaining = 5;
+
 }
+
 
 
 function checkPastAttacks(row, col, compPastAttacks) {
   return  isInPastAttacks = compPastAttacks.some(pos => pos[0] === row && pos[1] === col);
   }
 
-function compTurn(board, playerShips, playerShipNames, gameCallback) { 
+function compTurn(playerBoard, playerShips, gameCallback) { 
   let playerTurn = false;
 
 
@@ -29,47 +35,45 @@ function compTurn(board, playerShips, playerShipNames, gameCallback) {
         row = Math.floor(Math.random() * boardSize);
         col = Math.floor(Math.random() * boardSize);
         isInPastAttacks = checkPastAttacks(row, col, compPastAttacks);
-        console.log(`Generated position: row = ${row}, col = ${col}, isInPastAttacks = ${isInPastAttacks}`)
       } while(isInPastAttacks);
 
 
       let compAttk = [row, col];
-  
-      console.log(`starting compAttk is = ${compAttk}`);
 
       if(isInPastAttacks) {
-        console.log('this should not be running')
+        console.log('this should not be running');
       }
 
-      if(board[row][col] && !isInPastAttacks) {
-        console.log(`Computer Attack is: row = ${row}, col = ${col} and HIT!`)
-        console.log(`checking isInPastAttacks = ${isInPastAttacks}`);
+      if(playerBoard[row][col] && !isInPastAttacks) {
+        playerBoard[row][col] = "X";
+        console.log(`You've been HIT!`);
+        updateHits(row, col, playerShips, gameCallback);
+      }
+
+      if(!playerBoard[row][col] && !isInPastAttacks) {
+        console.log(`Computer Missed, your turn `)
+        playerBoard[row][col] = "O"; 
+        playerTurn = true;
 
       }
       compPastAttacks.push(compAttk);
-      console.log('testing')
-      playerTurn = true;
     }
-
-    console.log(`Computer past attacks are = ${JSON.stringify(compPastAttacks)}`)
   }
 
 
 
 
-  function updateHits(row, col, ships, compShipsRemaining, gameCallback) {
+  function updateHits(row, col, ships, gameCallback) {
     for (const shipName in ships) {
         if (ships.hasOwnProperty(shipName)) {
-            // const ship = {...ships[shipName]};
             if (ships[shipName].position.some(pos => pos[0] === row && pos[1] === col)) {
             ships[shipName].hits += 1;
-            console.log(`hits += 1 - is working hits = ${ships[shipName].hits} &  ships.length = ${ships[shipName].length} `);
                 if (ships[shipName].hits === ships[shipName].length) {
-                    compShipsRemaining--;
-                    console.log(`You sunk the ${ships[shipName].name}, ${compShipsRemaining} Ships Remaining!`);
+                  playerShipsRemaining--;
+                    console.log(`Computer has Sunk your ${ships[shipName].name}, ${playerShipsRemaining} Ships Remaining!`);
                     delete ships[shipName];
-                    if(compShipsRemaining === 0) {
-                      let winner = true;
+                    if(playerShipsRemaining === 0) {
+                      let winner = false;
                       endOfGame(winner)
                       gameCallback();
                       return;

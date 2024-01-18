@@ -30,13 +30,7 @@ function playGame() {
   placeShips(playerBoard, boardSize, playerShips, playerShipNames);
   placeShips(compBoard, boardSize, compShips, compShipNames);
 
-  console.log('this is player board')
-  displayBoard2(playerBoard);
-
-  console.log('this is comp board')
-  displayBoard2(compBoard);
-
-  displayBoard(playerBoard);
+  displayBoard(compBoard);
 
   function gameCallback() {
     resetPlayerAttacks();
@@ -47,7 +41,7 @@ function playGame() {
 
   while(true) {
     playerTurn(compBoard, playerBoard, compShips, gameCallback);
-    compTurn(playerBoard, playerShips, playerShipNames, gameCallback);
+    compTurn(playerBoard, playerShips, gameCallback);
   }
 
 }

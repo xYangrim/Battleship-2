@@ -64,7 +64,6 @@ function playerTurn(board, playerBoard, ships, gameCallback) {
               // const ship = {...ships[shipName]};
               if (ships[shipName].position.some(pos => pos[0] === row && pos[1] === col)) {
               ships[shipName].hits += 1;
-              console.log(`hits += 1 - is working hits = ${ships[shipName].hits} &  ships.length = ${ships[shipName].length} `);
                   if (ships[shipName].hits === ships[shipName].length) {
                       compShipsRemaining--;
                       console.log(`You sunk the ${ships[shipName].name}, ${compShipsRemaining} Ships Remaining!`);
